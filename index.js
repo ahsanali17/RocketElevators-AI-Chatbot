@@ -85,6 +85,18 @@ function getElevatorStatus(agent) {
     });
 }
 
+// Function to change the status of a specified elevator
+function changeElevatorStatus(agent) {
+    const id = agent.parameters.id;
+    const newStatus = agent.parameters.newStatus;
+
+    return axios.put(`https://rest-api-burroughs.herokuapp.com/api/elevators/${id}/status`, {
+        "id": `${id}`, 
+        "status": `${newStatus}`})
+        .then(agent.add(`Elevator ${id}'s status has been changed to ${newStatus}.`)
+    );
+}
+
 // Run the proper function handler based on the matched Dialogflow intent name
 let intentMap = new Map();
 intentMap.set('Default Welcome Intent', welcome);
@@ -98,5 +110,6 @@ intentMap.set('customerCount', customerCount);
 intentMap.set('quoteCount', quoteCount);
 intentMap.set('leadCount', leadCount);
 intentMap.set('elevatorsNotRunning', elevatorsNotRunning);
+intentMap.set('changeElevatorStatus', changeElevatorStatus);
 agent.handleRequest(intentMap);
 });
