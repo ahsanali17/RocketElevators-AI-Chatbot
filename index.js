@@ -92,8 +92,31 @@ function changeElevatorStatus(agent) {
 
     return axios.put(`https://rest-api-burroughs.herokuapp.com/api/elevators/${id}/status`, {
         "id": `${id}`, 
-        "status": `${newStatus}`})
-        .then(agent.add(`Elevator ${id}'s status has been changed to ${newStatus}.`)
+        "status": `${newStatus}`
+        })
+            .then(agent.add(`Elevator ${id}'s status has been changed to ${newStatus}.`)
+    );
+}
+
+// Function to submit an intervention
+function submitIntervention(agent) {
+    const customer_id = agent.parameters.customer_id;
+    const building_id = agent.parameters.building_id;
+    const battery_id = agent.parameters.battery_id;
+    const column_id = agent.parameters.column_id;
+    const elevator_id = agent.parameters.elevator_id;
+    const report = agent.parameters.report;
+
+    return axios.post(`https://rest-api-burroughs.herokuapp.com/api/interventions`, {
+        "customer_id": `${customer_id}`,
+        "building_id": `${building_id}`,
+        "battery_id": `${battery_id}`,
+        "column_id": `${column_id}`,
+        "elevator_id": `${elevator_id}`,
+        "report": `${report}`,
+        "status": "Pending"
+        })
+        .then(agent.add(`Your intervention request has been submitted. An agent of Rocket Elevators will contact you soon.`)
     );
 }
 
@@ -111,5 +134,6 @@ intentMap.set('quoteCount', quoteCount);
 intentMap.set('leadCount', leadCount);
 intentMap.set('elevatorsNotRunning', elevatorsNotRunning);
 intentMap.set('changeElevatorStatus', changeElevatorStatus);
+intentMap.set('submitIntervention', submitIntervention);
 agent.handleRequest(intentMap);
 });
