@@ -1,0 +1,103 @@
+Commands to run with the ChatBot:
+
+INTENTS:
+    greeting:
+        Training Phrases:
+            - Hello!
+            - What is going on at Rocket Elevators?
+            - How are things at Rocket Elevators?
+        What they do:
+            - Returns the greeting from the API.
+    
+    getElevatorStatus:
+        Training Phrases:
+            - status elevator x
+            - What is the status of elevator x?
+        What they do:
+            - Returns the status of a given elevator and adds it to a string.
+        
+    customerCount:
+        Training Phrases:
+            - customers
+            - customer
+            - How many customers does Rocket Elevators have?
+        What they do:
+            - Returns the number of customers in the MySQL database.
+        
+    buildingCount:
+        Training Phrases:
+            - buildings
+            - building
+            - How many buildings does Rocket Elevators serve?
+        What they do:
+            - Returns the number of buildings in the MySQL database.
+        
+    batteryCount:
+        Training Phrases:
+            - batteries
+            - battery
+            - How many batteries are in service?
+        What they do:
+            - Returns the number of batteries in the MySQL database.
+        
+    elevatorCount:
+        Training Phrases:
+            - elevators
+            - elevator
+            - How many elevators are there in the Rocket Elevators network?
+        What they do:
+            - Returns the number of elevators in the MySQL database.
+        
+    leadCount:
+        Training Phrases:
+            - leads
+            - lead
+            - How many leads are waiting?
+        What they do:
+            - Returns the number of leads in the MySQL database.
+        
+    quoteCount:
+        Training Phrases:
+            - quotes
+            - quote
+            - How many quotes are awaiting processing?
+        What they do:
+            - returns the number of quotes in the MySQL database.
+        
+    elevatorsNotRunning:
+        Training Phrases:
+            - elevators inactive
+            - inactive elevators
+            - elevators not running
+            - How many elevators are inactive?
+        What they do:
+            - Returns the number of elevators in the MySQL database that have a status that is not "Active".
+            
+    changeElevatorStatus:
+        Training Phrases:
+            - change elevator x status to Active
+            - change elevator x status to Inactive
+            - change elevator x status to Intervention
+            - Change the status of elevator x to Intervention.
+        What they do:
+            - Changes the status of the given elevator to the given status.
+            (WARNING: The status given must be either "Active", "Inactive", or "Intervention", including the capital, otherwise the API will not accept the change.)
+        
+    getElevatorInfo:
+        Training Phrases:
+            - elevator x information
+            - elevator x info
+            - Give me information on elevator 1.
+        What they do:
+            - Returns all of the fields in the MySQL database for the given elevator.
+        
+    submitIntervention:
+        Training Phrases:
+            - Submit intervention customer 1, building 1, battery 1, column 1, elevator 1, description of enter report here.
+            - Submit  intervention customer 1,  building 1, battery 1, column 1, elevator 1, description of test.
+            - Submit intervention customer 1 building 1 battery 1 column 1 elevator 1  description of report
+        What they do:
+            - Submit an intervention to the MySQL database, using all the values given in the statement provided.
+                - At present, the submission only works properly when given the exact training phrases provided, otherwise it seems to miss some of the id values,
+                and so far I have not found a way to reliably take a report that is flexible in the way it is written, as in having more than one word.
+
