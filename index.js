@@ -85,6 +85,39 @@ function getElevatorStatus(agent) {
     });
 }
 
+// Function to get the info of a specified elevator
+function getElevatorInfo(agent) {
+    const id = agent.parameters.id;
+    return axios.get(`https://rest-api-burroughs.herokuapp.com/api/elevators/${id}`)
+    .then((result) => {
+        var serial_number = result.data.serial_number;
+        var model = result.data.model;
+        var building_type = result.data.building_type;
+        var status = result.data.status;
+        var date_of_commissioning = result.data.date_of_commissioning;
+        var date_of_last_inspection = result.data.date_of_last_inspection;
+        var certificate_of_inspection = result.data.certificate_of_inspection;
+        var information = result.data.information;
+        var notes = result.data.notes;
+        var created_at = result.data.updated_at;
+        var updated_at = result.data.updated_at;
+        var column_id = result.data.column_id;
+        agent.add(`Elevator ${id}'s info:\n\
+            Serial Number: ${serial_number}\n\
+            Model: ${model}\n\
+            Building Type: ${building_type}\n\
+            Status: ${status}\n\
+            Commission Date: ${date_of_commissioning}\n\
+            Last Inspection: ${date_of_last_inspection}\n\
+            Inspection Certificate: ${certificate_of_inspection}\n\
+            Information: ${information}\n\
+            Notes: ${notes}\n\
+            Created: ${created_at}\n\
+            Last Updated: ${updated_at}\n\
+            Column ID: ${column_id}`);
+    });
+}
+
 // Function to change the status of a specified elevator
 function changeElevatorStatus(agent) {
     const id = agent.parameters.id;
@@ -135,5 +168,6 @@ intentMap.set('leadCount', leadCount);
 intentMap.set('elevatorsNotRunning', elevatorsNotRunning);
 intentMap.set('changeElevatorStatus', changeElevatorStatus);
 intentMap.set('submitIntervention', submitIntervention);
+intentMap.set('getElevatorInfo', getElevatorInfo);
 agent.handleRequest(intentMap);
 });
