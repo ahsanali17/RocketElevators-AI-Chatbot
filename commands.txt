@@ -87,17 +87,14 @@ INTENTS:
         Training Phrases:
             - elevator x information
             - elevator x info
-            - Give me information on elevator 1.
+            - Give me information on elevator x.
         What they do:
             - Returns all of the fields in the MySQL database for the given elevator.
         
     submitIntervention:
         Training Phrases:
+            - Submit intervention customer 1, building 1, elevator 1, description of testing.
             - Submit intervention customer 1, building 1, battery 1, column 1, elevator 1, description of enter report here.
-            - Submit  intervention customer 1,  building 1, battery 1, column 1, elevator 1, description of test.
-            - Submit intervention customer 1 building 1 battery 1 column 1 elevator 1  description of report
         What they do:
             - Submit an intervention to the MySQL database, using all the values given in the statement provided.
-                - At present, the submission only works properly when given the exact training phrases provided, otherwise it seems to miss some of the id values,
-                and so far I have not found a way to reliably take a report that is flexible in the way it is written, as in having more than one word.
 
